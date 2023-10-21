@@ -44,7 +44,9 @@ function PdfBuilder({personalInfo, links, schools, experiences, projects} : PdfB
       <Page size="A4" style={styles.page}>
           <View style={styles.introSection}>
             <Text style={styles.title}>{personalInfo.name} {personalInfo.surname}</Text>
-            <Text style={styles.content}>Phone: {personalInfo.phone}</Text>
+            {personalInfo.phone != "" ?  (
+            <Text style={styles.content}>Phone: {personalInfo.phone}</Text>) : (<Text></Text>)}
+
             {links && links[0] != "" ? (links.map((link) => {
               return(
                 <div>
