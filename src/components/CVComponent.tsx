@@ -32,3 +32,9 @@ export interface RootState {
     education: ProjectComponent[],
     project: EducationComponent[]
 }
+
+export type personalInfoType = {
+    name: string,
+      surname: string,
+      phone: string
+  }

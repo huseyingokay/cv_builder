@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { EducationComponent, ExperienceComponent, ProjectComponent } from './CVComponent';
+import { EducationComponent, ExperienceComponent, ProjectComponent, personalInfoType } from './CVComponent';
 import { StyleSheet, Document, Text, Page, PDFViewer, View } from '@react-pdf/renderer';
 
 type PdfBuilderProps = {
+    personalInfo: personalInfoType;
+    links: string[]
     experiences: ExperienceComponent[];
     schools: EducationComponent[];
     projects: ProjectComponent[];
@@ -34,17 +36,24 @@ const styles = StyleSheet.create({
   },
 });
 
-function PdfBuilder({schools, experiences, projects} : PdfBuilderProps) {
+function PdfBuilder({personalInfo, links, schools, experiences, projects} : PdfBuilderProps) {
   return (
     <div className="main">
       <PDFViewer style={styles.pdfViewer} showToolbar={true}>
       <Document>
       <Page size="A4" style={styles.page}>
           <View style={styles.introSection}>
-            <Text style={styles.title}>John Doe</Text>
-            <Text style={styles.content}>123 Main St, City, State</Text>
-            <Text style={styles.content}>Phone: (123) 456-7890</Text>
-            <Text style={styles.content}>Email: john.doe@email.com</Text>
+            <Text style={styles.title}>{personalInfo.name} {personalInfo.surname}</Text>
+            <Text style={styles.content}>Phone: {personalInfo.phone}</Text>
+            {links && links[0] != "" ? (links.map((link) => {
+              return(
+                <div>
+                    <Text style={styles.content}>
+                      {link}
+                    </Text>
+                </div>
+              )
+            })) : (<Text></Text>)}
           </View>
 
           <View style={styles.section}>

@@ -30,6 +30,13 @@ export function CVBuilder() {
     description: "",
   }]);
 
+  const [links, setLinksChild] = useState([""]);
+  const [personalInfo, setPersonalInfochild] = useState({
+    name: "",
+    surname: "",
+    phone: ""
+  });
+
   const createCV = () => {
     navigate("/pdf")
   }
@@ -39,7 +46,7 @@ export function CVBuilder() {
     <Route path='/' element={
         <div>
         CV Builder
-        <Introduction />
+        <Introduction setLinksChild={setLinksChild} setPersonalInfochild={setPersonalInfochild}/>
         <Education schools={schools} setSchools={setSchools}/>
         <Experience experiences={experiences} setExperiences={setExperiences}/>
         <Project projects={projects} setProjects={setProjects}/>
@@ -47,7 +54,7 @@ export function CVBuilder() {
         </div>
         }>
     </Route>
-    <Route path='/pdf' element={<PdfBuilder schools={schools} experiences={experiences} projects={projects}/>}> </Route>
+    <Route path='/pdf' element={<PdfBuilder personalInfo={personalInfo} links={links} schools={schools} experiences={experiences} projects={projects}/>}> </Route>
     </Routes>   
 
   );

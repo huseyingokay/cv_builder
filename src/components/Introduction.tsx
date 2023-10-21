@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { personalInfoType } from "./CVComponent";
 
-export function Introduction() {
+
+type IntroductionProps = {
+  setLinksChild: (links: string[]) => void;
+  setPersonalInfochild: (links: personalInfoType) => void;
+}
+
+export function Introduction({setLinksChild, setPersonalInfochild} : IntroductionProps) {
   const [links, setLinks] = useState([""]);
   const [personalInfo, setPersonalInfo] = useState({
     name: "",
@@ -23,7 +30,7 @@ export function Introduction() {
   const handleChange = ( e:React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
     let value = e.currentTarget.value;
-    let name = e.currentTarget.name;
+    let name = e.currentTarget.className;
  
     setPersonalInfo((prevalue) => {
       return {
@@ -31,6 +38,16 @@ export function Introduction() {
         [name]: value
       }
     })
+
+    setPersonalInfochild(personalInfo)
+  };
+
+  const handleLinkChange = (index:number, e:React.FormEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    let data = [...links];
+    data[index] = e.currentTarget.value;
+    setLinks(data);
+    setLinksChild(data)
   };
 
   return (
@@ -40,6 +57,8 @@ export function Introduction() {
           id="name"
           className='name'
           placeholder='Add Your Name'
+          value={personalInfo.name}
+          onChange={(e) => handleChange(e)}
       ></input>
 
       <input
@@ -47,13 +66,17 @@ export function Introduction() {
           id="surname"
           className='surname'
           placeholder='Add Your Surname'
+          value={personalInfo.surname}
+          onChange={(e) => handleChange(e)}
       ></input>
 
       <input
           type='string'
-          id="number"
-          className='number'
+          id="phone"
+          className='phone'
           placeholder='Add Your Phone Number'
+          value={personalInfo.phone}
+          onChange={(e) => handleChange(e)}
       ></input>
           
       {links.map((link, index) => {
@@ -65,6 +88,7 @@ export function Introduction() {
                 className='link'
                 placeholder='Add Link'
                 value={link}
+                onChange={(e) => {handleLinkChange(index, e)}}
             ></input>
             <button onClick={(e) => deleteLink(index, e)}> Delete Link</button> 
         </div>
