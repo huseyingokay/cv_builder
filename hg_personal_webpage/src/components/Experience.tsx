@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { ExperienceComponent } from "./CVComponent";
 
-export function Experience() {
-  const [experiences, setExperiences] = useState([{
-    title: "",
-    location: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-  }]);
+type ExperienceProps = {
+  experiences: ExperienceComponent[];
+  setExperiences: (experiences: ExperienceComponent[]) => void;
+};
 
+export function Experience({experiences, setExperiences} : ExperienceProps) {
   const handleChange = (index:number, e:React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
     let data = [...experiences];

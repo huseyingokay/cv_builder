@@ -2,22 +2,22 @@ export interface ExperienceComponent {
     title: string,
     location: string,
     startDate: string,
-    endDate?: string,
-    description?: string
+    endDate: string,
+    description: string
 }
 
 export interface ProjectComponent {
     name: string,
-    startDate?: Date,
-    endDate?: Date,
-    description?: string
+    startDate: string,
+    endDate: string,
+    description: string
 }
 
 export interface EducationComponent {
     name: string,
-    startDate: Date,
-    endDate?: Date,
-    gpa?: Number
+    startDate: string,
+    endDate: string,
+    gpa: string
 }
 
 export enum Category{

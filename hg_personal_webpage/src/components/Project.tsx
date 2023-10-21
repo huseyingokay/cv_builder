@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { ProjectComponent } from "./CVComponent";
 
-export function Project() {
-  const [projects, setProjects] = useState([{
-    name: "",
-    startDate: "",
-    endDate: "",
-    description: "",
-  }]);
+type ProjectProps = {
+  projects: ProjectComponent[];
+  setProjects: (projects: ProjectComponent[]) => void;
+};
 
+export function Project({projects, setProjects} : ProjectProps) {
   const handleChange = (index:number, e:React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
     let data = [...projects];

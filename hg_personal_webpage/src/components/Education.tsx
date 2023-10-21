@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
+import { EducationComponent } from "./CVComponent";
+  
+type SchoolProps = {
+    schools: EducationComponent[];
+    setSchools: (schools: EducationComponent[]) => void;
+};
 
-export function Education() {
-  const [schools, setSchools] = useState([{
-    name: "",
-    startDate: "",
-    endDate: "",
-    gpa: "",
-  }]);
-
+export function Education({schools, setSchools} : SchoolProps) {
   const handleChange = (index:number, e:React.FormEvent<HTMLInputElement>) => {
     e.preventDefault()
     let data = [...schools];
@@ -35,34 +34,34 @@ export function Education() {
   return (
     <div>
       <span> Schools </span>
-      <form className='projectForm'>
-        {schools.map((project, index) => {
+      <form className='schooltForm'>
+        {schools.map((school, index) => {
           return (
             <div key={index}>
                 <input
                     type='text'
                     id="name"
                     className='name'
-                    placeholder='Add Project Name'
-                    value={project.name}
+                    placeholder='Add School Name'
+                    value={school.name}
                     onChange={(e) => {handleChange(index, e)}}
                 ></input>
 
                 <input
-                    type='date'
+                    type='month'
                     id="startDate"
                     className='startDate'
                     placeholder='Add Start Date'
-                    value={project.startDate}
+                    value={school.startDate}
                     onChange={(e) => {handleChange(index, e)}}
                 ></input>
 
                 <input
-                    type='date'
+                    type='month'
                     id="endDate"
                     className='endDate'
                     placeholder='Add End Date'
-                    value={project.endDate}
+                    value={school.endDate}
                     onChange={(e) => {handleChange(index, e)}}
                 ></input>
 
@@ -71,7 +70,7 @@ export function Education() {
                     id="gpa"
                     className='gpa'
                     placeholder='Add gpa'
-                    value={project.gpa}
+                    value={school.gpa}
                     onChange={(e) => {handleChange(index, e)}}
                 ></input>
                 <button onClick={(e) => {deleteProject(index, e)}}>Delete</button>
@@ -82,14 +81,6 @@ export function Education() {
       
       <button onClick={addFields}> Add Project</button>  
 	  </form>
-
-      <ul className='list-group'>
-			{schools.map((project, index) => (
-                        <div key = {index}>
-                            <span>{project.gpa}</span> 
-                        </div>
-                      ))}
-		</ul>
     </div>
   );
 }
